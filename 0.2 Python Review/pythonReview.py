@@ -44,7 +44,7 @@ youtube_video = dislike(youtube_video)
 print("After dislike:", youtube_video)  # dislikes should be 1
 
 # add_comment function
-youtube_video = add_comment(youtube_video, "user1", "Great video!")
+youtube_video = add_comment(youtube_video, "user1", "Funny video!")
 print("After adding comment:", youtube_video)  # should have one comment from 'user1'
 
 # likes (495 times)
