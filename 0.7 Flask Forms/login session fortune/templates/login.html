@@ -1,0 +1,24 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<title>Fortune Teller</title>
+</head>
+<body>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='mystyle.css') }}">
+	<h1> Welcome to The Fortune Teller</h1>
+	<!-- <p> Click the link to know your fortune</p> -->
+	<!-- <a href = '/fortune'> Fortune Teller</a> -->
+	<!-- <form action="{{ url_for('login') }}" method="POST"> -->
+		<!-- <label for="birth_month" style="font-size: 25px">Enter your birth month:</label> -->
+		<br>
+		<br>
+	<form method="POST">
+		<input type= "text"  id="username" name="username" placeholder="Your name">
+		<br>
+		<input type= "text"  id="birth_month" name="birth_month" placeholder="Birth Month">
+		<br>
+		<input type="submit" value="Login">
+    </form>
+
+</body>
+</html>
