@@ -12,15 +12,18 @@ def login():
 	if request.method == "POST":
 		username = request.form['username']
 		birth_month = request.form['birth_month']
-		if len(birth_month) > 10:
-			return redirect(url_for('too_long'))
-		chosen = random.choice(my_fortunes)
-		login_session['username'] = username
-		login_session['birth_month'] = birth_month
-		login_session['fortune'] = chosen
-		return redirect(url_for('home'))
+		if birth_month:
+			index = len(birth_month)
+			if index < 10:
+				chosen = my_fortunes[index]
+				return redirect(url_for('home'))
+		else:
+			chosen = random.choice(my_fortunes)
+			login_session['username'] = username
+			login_session['birth_month'] = birth_month
+			login_session['fortune'] = chosen
+		
 	return render_template('login.html')
-
 	
 @app.route('/home')
 def home():
