@@ -6,8 +6,8 @@
 <body>
     <h1>Your Quotes</h1>
     <ul>
-        {% for quote in quotes %}
-        <li>{{ quote }}</li>
+        {% for quote in quotes.values() %}
+            <h2>{{quote['text']}} {{quote['said_by']}}</h2>
         {% endfor %}
     </ul>
     <a href="{{ url_for('home') }}">Back to Home</a>
