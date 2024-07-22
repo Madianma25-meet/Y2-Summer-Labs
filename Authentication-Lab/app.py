@@ -27,10 +27,12 @@ def signup():
   if request.method == "POST":
     email = request.form['email']
     password = request.form['password']
-    login_session['qoutes']= []
+    
     try:
       user = auth.create_user_with_email_and_password(email, password)
       login_session['user'] = user
+      login_session['quotes']= []
+      login_session.modified = True
       return redirect(url_for('home'))
     except:
       error = "oopsie"
@@ -42,9 +44,10 @@ def signin():
   if request.method == "POST":
     email = request.form['email']
     password = request.form['password']
-    login_session['qoutes']= []
+    login_session['quotes']= []
     user = auth.signin_user_with_email_and_password(email, password)
     login_session['user'] = user
+    login_session.modified = True
     return redirect(url_for('home'))
   return render_template('signin.html')
 
@@ -52,7 +55,8 @@ def signin():
 def home():
   if request.method == "POST":
     quote = request.form['quote']
-    login_session['qoutes'].append(quote)
+    login_session['quotes'].append(quote)
+    login_session.modified = True
     return redirect(url_for('thanks'))
   return render_template('home.html')
 
@@ -62,10 +66,7 @@ def home():
 
 @app.route('/signout', methods= ['GET' , 'POST'])
 def signout():
-  if request.method == "POST":
-    login_session['user'] = None
-    auth.current_user = None 
-    login_session['quotes']= None
+  login_session.clear()
   return redirect(url_for('signin'))
 
 @app.route('/thanks', methods= ['GET' , 'POST'])
@@ -74,7 +75,7 @@ def thanks():
 
 @app.route('/display', methods= ['GET' , 'POST'])
 def display():
-  quotes = login_session.get('quotes', [])
+  quotes = login_session['quotes']
   return render_template('display.html', quotes=quotes)
   
 
