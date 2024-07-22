@@ -1,11 +1,5 @@
 <!DOCTYPE html>
 <body>
-	<h2>Your Quotes</h2>
-    <ul>
-        {% for quote in session.quotes %}
-        <li>{{ quote }}</li>
-        {% endfor %}
-    </ul>
 	<form action="/home" method="POST">
 		<input type="text" name="quote" placeholder="Type a quote">
 		<button type="submit" name="submit">Submit</button>

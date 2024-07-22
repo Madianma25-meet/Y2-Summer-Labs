@@ -52,8 +52,6 @@ def signin():
 def home():
   if request.method == "POST":
     quote = request.form['quote']
-    if 'quotes' not in login_session: 
-      login_session['quotes'] = []
     login_session['qoutes'].append(quote)
     return redirect(url_for('thanks'))
   return render_template('home.html')
@@ -67,6 +65,7 @@ def signout():
   if request.method == "POST":
     login_session['user'] = None
     auth.current_user = None 
+    login_session['quotes']= None
   return redirect(url_for('signin'))
 
 @app.route('/thanks', methods= ['GET' , 'POST'])
@@ -75,10 +74,8 @@ def thanks():
 
 @app.route('/display', methods= ['GET' , 'POST'])
 def display():
-  if request.method == "POST":
-    quotes = request.form['quotes']
-    login_session['quotes'] = quotes
-  return render_template('display.html')
+  quotes = login_session.get('quotes', [])
+  return render_template('display.html', quotes=quotes)
   
 
 
