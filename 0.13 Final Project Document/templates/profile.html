@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Profile</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">FeɘdMe</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <form class="form-inline" action="/signout" method="post">
+                        <button class="btn btn-outline-danger" type="submit">Sign Out</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container mt-5">
+        <h1>Profile</h1>
+        <!-- Profile content goes here -->
+        <h2> {{username}}'s reviews:</h2>
+        {% if session.reviews %}
+            <ul class="list-group">
+                {% for review in session.reviews %}
+                    <li class="list-group-item">
+                        <h5>{{ review.rest_name }}</h5>
+                        <p><a href="{{ review.link }}" target="_blank">{{ review.link }}</a></p>
+                        <p>{{ review.review }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No reviews yet.</p>
+        {% endif %}
+    </div>
+        <!-- <ul>
+            {% for added in reviews %}
+                <h5> {{added['rest_name']}} {{added['review']}} </h5>
+            {% endfor %} -->
+
+
+        </ul>
+
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

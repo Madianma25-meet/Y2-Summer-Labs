@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Home</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">FeɘdMe</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <form class="form-inline" action="/signout" method="post">
+                        <button class="btn btn-outline-danger" type="submit">Sign Out</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container mt-5">
+        <h1>Welcome to FeɘdMe</h1>
+        <p> We help you keep all places you had a memorable meal at stored and organized. Every time you eat out, remember to add the place here </p>
+        <h5> Add a review:</h5>
+        <form action="/home" method="POST">
+            <div class="form-group">
+                <!-- <label for="quote">Add a review:</label><br> -->
+                <input type="text" class="form-control" id="rest_name" name="rest_name" placeholder="Reastarant Name" required><br>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="link" name="link" placeholder="Web Link" required><br>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="review" name="review" placeholder="Review" required><br>
+            </div>     
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
