@@ -37,7 +37,9 @@ def signup():
     try:
       user = auth.create_user_with_email_and_password(email, password)
       login_session['user'] = user
-      db.child("users").child(user['localId']).set(user_data)
+      login_session['username'] = username 
+      UID=user['localId']
+      db.child("users").child(UID).set(user_data)
       return redirect(url_for('home'))
     except:
       return 'Oopsie! something went wrong, please try again'
@@ -50,8 +52,9 @@ def signin():
     email = request.form['email']
     password = request.form['password']
     try:
-      user = auth.signin_user_with_email_and_password(email, password)
+      user = auth.sign_in_user_with_email_and_password(email, password)
       login_session['user'] = user
+      login_session['username'] = db.child('users').child(user['localId']).child('username').get().val()
       login_session.modified = True
       return redirect(url_for('home'))
     except:
@@ -66,30 +69,46 @@ def home():
     rest_name = request.form['rest_name']
     link = request.form['link']
     review = request.form['review']
+    #user_id = login_session['user']['localId']
 
 
 
     added = {"rest_name": rest_name,
     "link": link,
-    "review": review
+    "review": review,
+    "user_id": login_session['user']['localId']
     }
-    login_session['reviews'] = []
-    login_session['reviews'].append(added)
-    # login_session['reviews']=login_session['reviews'].append(added)
-    login_session.modified = True
+    db.child('reviews').push(added)
+    # login_session['reviews'] = []
+    # login_session['reviews'].append(added)
+    # # login_session['reviews']=login_session['reviews'].append(added)
+    # login_session.modified = True
 
-    db.child("reviews").push(added)
+    # db.child("users").child(user_id).push(added)
     return redirect(url_for('home'))
 
 
-@app.route('/profile', methods = ["GET" , "POST"])
+@app.route('/profile', methods = ["GET"])
 def profile():
-  return render_template('profile.html')
+  the_dict = db.child('reviews').get().val()
+  rev_dict=the_dict.values()
+
+  user_id= login_session['user']['localId']
+
+  return render_template('profile.html', rev_dict=rev_dict,user_id=user_id)
+  # user_id = login_session['user']['localId']
+  # try:
+  #   user_reviews = db.child('reviews').order_by_child('user_id').equal_to(user_id).get()
+  #   reviews = [review.val() for review in user_reviews.each()] if user_reviews else []
+  #   return render_template('profile.html', username = login_session['username'], reviews=reviews)
+  # except:
+  #   return 'Oopsie! something went wrong, please try again'
+
 
 @app.route('/signout', methods = ["GET" , "POST"])
 def signout():
   login_session.clear()
-  return render_template('signin.html')
+  return render_template('signup.html')
 
 
 

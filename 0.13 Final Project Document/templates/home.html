@@ -8,7 +8,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">FeɘdMe</a>
+        <a class="navbar-brand" href="/home">FeɘdMe</a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -24,9 +24,9 @@
     </nav>
     
     <div class="container mt-5">
-        <h1>Welcome to FeɘdMe</h1>
-        <p> We help you keep all places you had a memorable meal at stored and organized. Every time you eat out, remember to add the place here </p>
-        <h5> Add a review:</h5>
+        <h1 style="color: #007bff;">Welcome {{ session.username }} to FeɘdMe!</h1>
+        <h4> We help you keep all places you had a memorable meal at stored and organized. Every time you eat out, remember to add your review! </h4>
+        <h5 style="color: grey;"> Add a review:</h5>
         <form action="/home" method="POST">
             <div class="form-group">
                 <!-- <label for="quote">Add a review:</label><br> -->
@@ -39,6 +39,7 @@
                 <input type="text" class="form-control" id="review" name="review" placeholder="Review" required><br>
             </div>     
             <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="/profile">View profile</a>
         </form>
     </div>
     
