@@ -30,12 +30,13 @@
         <ul>
             {% for i in rev_dict %}
                 {% if i['user_id'] == user_id %}
-                <li> 
-                    
-                        <h4>{{ i['rest_name'] }}</h4>
+                <li>
+                        <a href="{{ i['link'] }}" style="font-size: 30px;"> {{ i['rest_name'] }}</a>
+                        <h4>{{ i['review'] }}</h4>
+                       <!--  <h4>{{ i['rest_name'] }}</h4>
                         <h4>{{ i['link'] }}</h4>
                         <h4>{{ i['review'] }}</h4>
-
+ -->
                     
                         
                 </li>
