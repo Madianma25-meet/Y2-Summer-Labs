@@ -57,8 +57,9 @@ def signin():
       login_session['username'] = db.child('users').child(user['localId']).child('username').get().val()
       login_session.modified = True
       return redirect(url_for('home'))
-    except:
-      return 'Oopsie! something went wrong, please try again'
+    except Exception as e:
+      print(e)
+      return redirect(url_for('home'))
   return render_template('signin.html')
 
 @app.route('/home' , methods = ["GET" , "POST"])
@@ -104,6 +105,12 @@ def profile():
   # except:
   #   return 'Oopsie! something went wrong, please try again'
 
+@app.route('/see_others')
+def see_others():
+  the_dict = db.child('reviews').get().val()
+  rev_dict=the_dict.values()
+  return render_template('others.html' , rev_dict=rev_dict)
+
 
 @app.route('/signout', methods = ["GET" , "POST"])
 def signout():
@@ -112,6 +119,7 @@ def signout():
 
 
 
+
   
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(debug = True , host= '0.0.0.0', port= 5001)

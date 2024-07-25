@@ -15,9 +15,6 @@
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/see_others">See Others</a>
-                </li>                
-                <li class="nav-item">
                     <form class="form-inline" action="/signout" method="post">
                         <button class="btn btn-outline-danger" type="submit">Sign Out</button>
                     </form>
@@ -27,24 +24,23 @@
     </nav>
     
     <div class="container mt-5">
-        <h1>{{ session.username }}'s Profile</h1>
+        <h1>Others' Reviews:</h1>
         <!-- Profile content goes here -->
-        <h2> Reviews:</h2>
+        
         <ol>
             {% for i in rev_dict %}
-                {% if i['user_id'] == user_id %}
+                
                 <li>
-                        <a href="{{ i['link'] }}" style="font-size: 30px;"> {{ i['rest_name'] }}</a>
-                        <h4>{{ i['review'] }}</h4>
-                       <!--  <h4>{{ i['rest_name'] }}</h4>
-                        <h4>{{ i['link'] }}</h4>
-                        <h4>{{ i['review'] }}</h4>
- -->
-                    
+                    <!-- <a href="{{ i['link'] }}" style="font-size: 30px;"> {{ i['rest_name'] }}</a> -->
+                    <a href="{{ i['link'] }}" style="font-size: 30px;"> {{ i['rest_name'] }}</a>
+                    <h4>{{ i['review'] }}</h4>
                         
                 </li>
-                {% endif %}
             {% endfor %} 
+            <br>
+            <br>
+            <br>
+            <a href="/home" style="font-size: 25px; position: absoright: 0; width: 100px; text-align:right;">Add yours</a>
         </ol>
     </div> 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
